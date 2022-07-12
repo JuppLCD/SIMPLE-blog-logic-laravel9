@@ -1,0 +1,53 @@
+.aside-admin {
+    height: 100%;
+    width: 100%;
+    max-width: 300px;
+    position: fixed;
+    top: 56px;
+    left: -500px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.aside-admin.openAside {
+    left: 0;
+}
+
+.main-admin {
+    min-height: calc(100vh - 56px);
+    margin-left: 0;
+    padding: 20px 0;
+    background-color: rgb(228, 228, 228);
+}
+
+#btnOpenAsideMovil {
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    z-index: 1;
+}
+
+@media screen and (min-width: 700px) {
+    #btnOpenAsideMovil {
+        display: none;
+    }
+
+    .aside-admin.openAside {
+        width: 300px;
+        max-width: none;
+        left: 0;
+    }
+
+    .aside-admin {
+        width: 70px;
+        left: 0;
+    }
+
+    .main-admin {
+        margin-left: 70px;
+    }
+
+    .main-admin.openAside {
+        margin-left: 300px;
+    }
+}
