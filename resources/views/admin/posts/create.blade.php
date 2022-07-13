@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="col">
-                <img src="{{old('image', 'https://image.shutterstock.com/image-vector/vector-line-icon-img-260nw-2050481219.jpg')}}"
+                <img src="{{old('image', 'https://blog.ida.cl/wp-content/uploads/sites/5/2020/04/tamano-redes-blog-655x470.png')}}"
                     id="imgElement" alt="Blog img" class="img-fluid">
             </div>
         </section>

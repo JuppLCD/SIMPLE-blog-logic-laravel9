@@ -8,12 +8,16 @@
             <div class="row">
                 @foreach ($posts as $post)
                 <div class="p-1 col-12 {{ $loop->first ? 'col-sm-12 col-lg-8': 'col-sm-6 col-lg-4'}}">
-                    {{-- * Luego teengo que descomentar el backgroundImage y quitar el backgroundColor ya que esta para
-                    evitar
-                    estar trallendo todo el rato las imagenes --}}
+                    @php
+                    $imgSRC = $post->image->url ??
+                    'https://blog.ida.cl/wp-content/uploads/sites/5/2020/04/tamano-redes-blog-655x470.png';
+
+                    if(!str_contains($imgSRC,'http')){
+                    $imgSRC = Storage::url($post->image->url);
+                    }
+                    @endphp
                     <div style="
-                        /* background-image:url('{{$post->image->url ?? 'https://blog.ida.cl/wp-content/uploads/sites/5/2020/04/tamano-redes-blog-655x470.png'}}'); */
-                        background-color: rgb( {{rand(0,255)}}, {{rand(0,255)}}, {{rand(0,255)}});
+                        background-image:url('{{$imgSRC}}');
                         height: 200px; background-size:cover; background-position: center; ">
 
                         <h3>

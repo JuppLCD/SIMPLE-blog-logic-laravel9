@@ -1,9 +1,16 @@
 @props(['post'])
 
 <div class="card mb-3">
-    <img src="{{$post->image->url ?? 'https://blog.ida.cl/wp-content/uploads/sites/5/2020/04/tamano-redes-blog-655x470.png'}}"
-        alt="{{$post->title}}" class="card-img-top"
-        style="height: 200px; background-size: cover; background-position: center">
+    @php
+    $imgSRC = $post->image->url ??
+    'https://blog.ida.cl/wp-content/uploads/sites/5/2020/04/tamano-redes-blog-655x470.png';
+
+    if(!str_contains($imgSRC,'http')){
+    $imgSRC = Storage::url($post->image->url);
+    }
+    @endphp
+    <img src="{{$imgSRC}}" alt="{{$post->title}}" class="card-img-top"
+        style="height: 200px; background-size:cover; background-position: center;">
     <div class="card-body">
         <h3 class="card-title"><a href="{{route('posts.show', $post)}}">{{$post->title}}</a></h3>
         <p class="card-text">{!!$post->extract!!}</p>

@@ -21,7 +21,13 @@ class PostController extends Controller
     {
         $this->authorize('published', $post);
 
-        return view('posts.show', compact('post'));
+        $similares = Post::where('category_id', $post->category_id)
+            ->where('status', 2)
+            ->where('id', '!=', $post->id)
+            ->latest('id')
+            ->take(4)
+            ->get();
+        return view('posts.show', compact('post', 'similares'));
     }
 
     public function byCategory(Category $category)

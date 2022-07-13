@@ -92,7 +92,7 @@
             <div class="col">
                 @php
                 $img = $post->image->url ??
-                'https://image.shutterstock.com/image-vector/vector-line-icon-img-260nw-2050481219.jpg';
+                'https://blog.ida.cl/wp-content/uploads/sites/5/2020/04/tamano-redes-blog-655x470.png';
 
                 if(!str_contains($img,'http')){
                 $img = Storage::url($post->image->url);
