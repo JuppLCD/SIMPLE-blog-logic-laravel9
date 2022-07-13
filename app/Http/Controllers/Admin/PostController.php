@@ -16,7 +16,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        if (auth()->user()->role->name === 'Admin') {
+        if (auth()->user()->role->name === 'Admin' || auth()->user()->role->name === 'Moderator') {
             $posts = Post::latest('id')->paginate(15);
         } else {
             $posts = Post::where('user_id', auth()->user()->id)->latest('id')->paginate(15);
@@ -98,5 +98,11 @@ class PostController extends Controller
         }
         $post->delete();
         return redirect()->route('admin.posts.index');
+    }
+
+    public function myPosts()
+    {
+        $posts = Post::where('user_id', auth()->user()->id)->latest('id')->paginate(15);
+        return view('admin.posts.index', compact('posts'));
     }
 }

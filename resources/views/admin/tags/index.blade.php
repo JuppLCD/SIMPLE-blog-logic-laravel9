@@ -2,7 +2,7 @@
     <x-slot name="title">
         Tags
     </x-slot>
-    @if (auth()->user()->role->name === 'Admin')
+    @if (auth()->user()->role->name === 'Admin' || auth()->user()->role->name === 'Moderator')
     <a href="{{ route('admin.tags.create') }}" class="btn btn-primary">Create tags</a>
     @endif
     <div class="table-responsive-xl mt-3">
@@ -12,7 +12,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Slug</th>
-                    @if (auth()->user()->role->name === 'Admin')
+                    @if (auth()->user()->role->name === 'Admin' || auth()->user()->role->name === 'Moderator')
                     <th scope="col">Options</th>
                     @endif
                 </tr>
@@ -23,7 +23,7 @@
                     <th scope="row">{{$tag->id}}</th>
                     <td>{{$tag->name}}</td>
                     <td>{{$tag->slug}}</td>
-                    @if (auth()->user()->role->name === 'Admin')
+                    @if (auth()->user()->role->name === 'Admin' || auth()->user()->role->name === 'Moderator')
                     <td width="180">
                         <div class="d-flex">
                             <a href="{{ route('admin.tags.edit', $tag) }}" class="btn btn-warning mx-2">Edit</a>

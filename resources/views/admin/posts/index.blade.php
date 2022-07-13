@@ -41,7 +41,7 @@
         </div>
 
         @else
-        <p>No hay Blogs</p>
+        <p>There are no blogs</p>
         @endif
     </div>
 </x-layouts.admin>

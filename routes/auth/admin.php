@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\UserController;
 Route::name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('home');
 
+    Route::get('posts/user', [PostController::class, 'myPosts'])->name('posts.myPosts');
     Route::resource('posts', PostController::class);
 
     //* All users see the index

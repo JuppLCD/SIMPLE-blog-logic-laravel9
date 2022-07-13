@@ -16,7 +16,6 @@ class PostRequest extends FormRequest
     {
         $slug = Str::slug($this->title);
 
-        // dd($this->slug, $slug, $this->route('post')->id);
         $id_ignore = $this->route('post')->id ?? '';
 
         $rules = [

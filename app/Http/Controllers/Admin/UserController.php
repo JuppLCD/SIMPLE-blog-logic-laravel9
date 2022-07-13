@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
+
 use Illuminate\Http\Request;
+
+use App\Models\Role;
 use App\Models\User;
+
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -29,16 +33,33 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        return $request->all();
+        $AuthUserRole = auth()->user()->role->name;
+        if ($AuthUserRole === 'Moderator' && $request->role == '2') {
+            return redirect()->back()->withErrors('A moderator cannot assign the admin role');
+        }
+        if ($AuthUserRole === 'Moderator' && $user->role->name === 'Moderator') {
+            return redirect()->back()->withErrors('A moderator cannot change the role to another moderator');
+        }
 
         $user->role_id = $request->role;
         $user->save();
 
-        return view('admin.users.edit', compact('user'));
+        return redirect()->route('admin.users.edit', $user);
     }
 
     public function destroy(User $user)
     {
-        // Borrar user
+        if ($user->role->name === 'Admin' && auth()->user()->role->name === 'Moderator') {
+            return redirect()->route('admin.users.index')->withErrors("Can't delete an Admin");
+        }
+        if ($user->role->name === 'Moderator' && auth()->user()->role->name === 'Moderator') {
+            return redirect()->route('admin.users.index')->withErrors("Can't delete another Moderator");
+        }
+
+        if ($user->image) {
+            Storage::delete($user->image->url);
+        }
+        $user->delete();
+        return redirect()->route('admin.users.index');
     }
 }

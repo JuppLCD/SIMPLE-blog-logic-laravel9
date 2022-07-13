@@ -4,7 +4,7 @@
                 class="ms-4 d-none">Profile</span></a>
     </li> --}}
 
-    @if (auth()->user()->role->name === 'Admin')
+    @if (auth()->user()->role->name === 'Admin' || auth()->user()->role->name === 'Moderator')
     <li class="list-group-item p-0">
         <a href="{{ route('admin.users.index') }}" class="text-reset text-decoration-none d-block p-2"><i
                 class="fa-solid fa-address-card fs-4 mx-3"></i><span class="ms-4 d-none">Users</span></a>
@@ -25,8 +25,9 @@
                 <ul class="accordion-body p-0 text-center">
                     <li class="list-group-item p-0"><a href="{{ route('admin.posts.index') }}"
                             class="text-reset text-decoration-none d-block p-2">Blogs</a></li>
-                    @if (auth()->user()->role->name === 'Admin')
-                    <li class="list-group-item p-0"><a href="#" class="text-reset text-decoration-none d-block p-2">My
+                    @if (auth()->user()->role->name === 'Admin' || auth()->user()->role->name === 'Moderator')
+                    <li class="list-group-item p-0"><a href="{{ route('admin.posts.myPosts') }}"
+                            class="text-reset text-decoration-none d-block p-2">My
                             Blogs</a></li>
                     @endif
                     <li class="list-group-item p-0"><a href="{{ route('admin.posts.create') }}"
