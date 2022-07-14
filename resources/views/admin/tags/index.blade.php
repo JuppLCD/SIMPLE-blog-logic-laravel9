@@ -5,6 +5,11 @@
     @if (auth()->user()->role->name === 'Admin' || auth()->user()->role->name === 'Moderator')
     <a href="{{ route('admin.tags.create') }}" class="btn btn-primary">Create tags</a>
     @endif
+    @if(session('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="table-responsive-xl mt-3">
         <table class="table table-dark table-striped">
             <thead>

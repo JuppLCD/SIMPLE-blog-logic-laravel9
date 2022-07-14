@@ -44,7 +44,7 @@ class UserController extends Controller
         $user->role_id = $request->role;
         $user->save();
 
-        return redirect()->route('admin.users.edit', $user);
+        return redirect()->route('admin.users.edit', $user)->with('success', 'User is successfully edited');
     }
 
     public function destroy(User $user)
@@ -60,6 +60,6 @@ class UserController extends Controller
             Storage::delete($user->image->url);
         }
         $user->delete();
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('success', 'User is successfully deleted');
     }
 }

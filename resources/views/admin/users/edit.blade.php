@@ -14,6 +14,12 @@
         @endforeach
         @endif
 
+        @if(session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+        @endif
+
         <div class="mb-3">
             <label for="name" class="form-label">UserName:</label>
             <input value="{{old('name', $user->name)}}" type="text" class="form-control" id="name" name="name"

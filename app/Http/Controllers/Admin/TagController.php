@@ -25,9 +25,8 @@ class TagController extends Controller
     public function store(TagRequest $request)
     {
         Tag::create($request->all());
-        return redirect()->route('admin.tags.index');
+        return redirect()->route('admin.tags.index')->with('success', 'Tag is successfully created');
     }
-
 
     public function edit(Tag $tag)
     {
@@ -37,12 +36,12 @@ class TagController extends Controller
     public function update(TagRequest $request, Tag $tag)
     {
         $tag->update($request->all());
-        return redirect()->route('admin.tags.index');
+        return redirect()->route('admin.tags.index')->with('success', 'Tag is successfully edited');
     }
 
     public function destroy(Tag $tag)
     {
         $tag->delete();
-        return redirect()->route('admin.tags.index');
+        return redirect()->route('admin.tags.index')->with('success', 'Tag is successfully deleted');
     }
 }

@@ -86,7 +86,7 @@ class PostController extends Controller
             $post->tags()->sync($request->tags);
         }
 
-        return redirect()->route('admin.posts.edit', $post);
+        return redirect()->route('admin.posts.edit', $post)->with('success', 'Post is successfully edited');
     }
 
     public function destroy(Post $post)
@@ -97,7 +97,7 @@ class PostController extends Controller
             Storage::delete($post->image->url);
         }
         $post->delete();
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index')->with('success', 'Post is successfully deleted');
     }
 
     public function myPosts()

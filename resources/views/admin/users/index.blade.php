@@ -11,6 +11,12 @@
     @endforeach
     @endif
 
+    @if(session('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+    @endif
+
     <div class="table-responsive-xl mt-3">
         <table class="table table-dark table-striped">
             <thead>

@@ -3,6 +3,11 @@
         Posts
     </x-slot>
     <a href="{{ route('admin.posts.create') }}" class="btn btn-primary">Create post</a>
+    @if(session('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="table-responsive-xl mt-3">
         @if ($posts->count())
         <table class="table table-dark table-striped">
