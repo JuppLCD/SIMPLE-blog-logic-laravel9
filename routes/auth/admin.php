@@ -18,6 +18,9 @@ Route::name('admin.')->group(function () {
     Route::resource('categories', CategoryController::class)->only('index');
     Route::resource('tags', TagController::class)->only('index');
 
+    //* Delete My Account
+    Route::delete('profile/user/delete', [UserController::class, 'deleteMyAccount'])->name('users.deleteMyAccount');
+
     //* Only the Admins
     Route::resource('categories', CategoryController::class)->except(['show', 'index'])->middleware('isAdmin');
     Route::resource('tags', TagController::class)->except(['show', 'index'])->middleware('isAdmin');

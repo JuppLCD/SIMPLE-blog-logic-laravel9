@@ -93,9 +93,6 @@ class PostController extends Controller
     {
         $this->authorize('author', $post);
 
-        if ($post->image) {
-            Storage::delete($post->image->url);
-        }
         $post->delete();
         return redirect()->route('admin.posts.index')->with('success', 'Post is successfully deleted');
     }

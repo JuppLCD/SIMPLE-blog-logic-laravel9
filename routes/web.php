@@ -11,4 +11,6 @@ Route::controller(PostController::class)->name('posts.')->group(function () {
 
     Route::get('/category/{category}', 'byCategory')->name('byCategory');
     Route::get('/tags/{tag}', 'byTag')->name('byTag');
+
+    Route::get('/profile', 'profile')->name('profile')->middleware('auth');
 });

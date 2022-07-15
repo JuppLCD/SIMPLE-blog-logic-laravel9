@@ -41,4 +41,10 @@ class PostController extends Controller
         $posts = $tag->posts()->where('status', 2)->latest('id')->paginate(8);
         return view('posts.tag', compact('posts', 'tag'));
     }
+
+    public function profile()
+    {
+        $posts = Post::where('user_id', auth()->user()->id)->latest('id')->paginate(15);
+        return view('posts.profile', compact('posts'));
+    }
 }

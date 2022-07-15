@@ -13,12 +13,6 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('isAdmin');
-    }
-
     public function index()
     {
         $users = User::latest('id')->paginate(15);
@@ -56,10 +50,14 @@ class UserController extends Controller
             return redirect()->route('admin.users.index')->withErrors("Can't delete another Moderator");
         }
 
-        if ($user->image) {
-            Storage::delete($user->image->url);
-        }
         $user->delete();
         return redirect()->route('admin.users.index')->with('success', 'User is successfully deleted');
+    }
+
+    public function deleteMyAccount()
+    {
+        $user = User::find(auth()->user()->id);
+        $user->delete();
+        return redirect()->route('posts.index');
     }
 }
